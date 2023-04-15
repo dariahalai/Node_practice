@@ -2,18 +2,18 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const morgan = require("morgan");
-const booksRouter = require("./routers/booksRouter");
+const contactsRouter = require("./routers/contactsRouter");
 const authRouter = require("./routers/authRouter");
 require("dotenv").config();
 
-const PORT = 3000;
+const PORT = 8000;
 
 const runServer = async () => {
   const app = express();
   app.use(express.json());
   app.use(cors());
   app.use(morgan("tiny"));
-  app.use("/api/books", booksRouter);
+  app.use("/api/contacts", contactsRouter);
   app.use("/auth", authRouter);
   try {
     await mongoose.connect(process.env.DB_HOST);
