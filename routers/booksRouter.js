@@ -1,12 +1,25 @@
-const express = reqoire("express");
-const { getBooks, addBook } = require("../controllers/booksController");
+const express = require("express");
+const {
+  getBooks,
+  addBook,
+  getBookById,
+  deleteBook,
+  updateBook,
+  updateStatusBook,
+} = require("../controllers/booksController");
+const {
+  booksValidator,
+  putBookValidator,
+  patchBookStatusValidator,
+} = require("../utils/booksValidator");
 
 const booksRouter = express.Router();
 
 booksRouter.get("/", getBooks);
-booksRouter.get("/:id");
-booksRouter.post("/", addBook);
-booksRouter.delete("/:id");
-booksRouter.put("/:id");
+booksRouter.get("/:id", getBookById);
+booksRouter.post("/", booksValidator, addBook);
+booksRouter.delete("/:id", deleteBook);
+booksRouter.put("/:id", putBookValidator, updateBook);
+booksRouter.patch("/:id/isRead", patchBookStatusValidator, updateStatusBook);
 
 module.exports = booksRouter;

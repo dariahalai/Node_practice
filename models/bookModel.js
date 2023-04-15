@@ -11,7 +11,6 @@ const booksSchema = new Schema({
   },
   image: {
     type: String,
-    required: true,
     validate: (value) => {
       value.includes("http");
     },
